@@ -21,29 +21,39 @@ perguntas = [
     },
 ]
 
-acertos = 0
-erros = 0
-alternativas = 1
+qtd_acertos = 0
 
-print(f'Responda as perguntas:')
-for questao in perguntas:
-    print(questao['Pergunta'])
-    for opcao in questao['Opções']:
-        print(f'{alternativas})', opcao)
-        alternativas += 1
-    resposta = input(f'Resposta: ')
-    if resposta == questao['Resposta']:
-        acertos += 1
-        alternativas = 1
+for pergunta in perguntas:
+    print('Pergunta: ', pergunta['Pergunta'])
+    print()
+
+    opcoes = pergunta['Opções']
+
+    for i, opcao in enumerate(pergunta['Opções']):
+        print(f'{i})', opcao)
+
+    print()
+
+    escolha = input('Escolha uma opção: ')
+
+    acertou = False
+    escolha_int = None
+    qtd_opcoes = len(opcoes)
+
+    if escolha.isdigit():
+        escolha_int = int(escolha)
+
+    if escolha_int is not None:
+        if escolha_int >= 0 and escolha_int < qtd_opcoes:
+            if opcoes[escolha_int] == pergunta['Resposta']:
+                acertou = True
+
+    print()
+    if acertou:
+        qtd_acertos += 1
+        print('Acertou!! 👍')
     else:
-        erros += 1
-        alternativas = 1
-    os.system('clear')
+        print('Errou!! ❌')
 
-print(f'Você teve:\nAcertos: {acertos}\nErros: {erros}')
-if acertos < 2:
-    print(f'Precisa esturdar mais.')
-elif acertos > 2:
-    print(f'Parabéns! Acertou tudo!.')
-else:
-    print(f'Não desanime, você foi bem!.')
+print(f'Você acertou {qtd_acertos}')
+print(f'de {len(perguntas)} perguntas!')
