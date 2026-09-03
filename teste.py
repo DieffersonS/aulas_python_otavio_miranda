@@ -1,5 +1,3 @@
-s1 = {1, 2, 3}
+string = 'Luiz'
 
-s1.discard(2)
-
-print(s1)
+print(getattr(string, 'upper')) # Vai retornar True
